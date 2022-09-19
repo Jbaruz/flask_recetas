@@ -22,10 +22,17 @@ class Receta(ModeloBase):
         self.updated_at = data['updated_at']
 
     @classmethod
+    def view_by_id(cls, id):
+        query = f"SELECT * FROM {cls.modelo} JOIN usuarios ON usuarios.id = {cls.modelo}.usuarios_id WHERE receta.id = %(id)s;" 
+        data = {'id': id }
+        results = connectToMySQL(os.environ.get("BASEDATOS_NOMBRE")).query_db(query,data)
+        print("AQUI QUIERO VER -->",results)
+        return cls(results[0])if len(results) > 0 else None
+
+    @classmethod
     def get_all_width_user(cls):
         query = f"SELECT * FROM {cls.modelo} JOIN usuarios ON usuarios.id = {cls.modelo}.usuarios_id;"
         results = connectToMySQL(os.environ.get("BASEDATOS_NOMBRE")).query_db(query)
-        print("AQUI QUIERO VER -->",results)
         all_data = []
         for data in results:
             all_data.append(cls(data))
@@ -42,8 +49,17 @@ class Receta(ModeloBase):
                         updated_at=NOW() 
                     WHERE id = %(id)s"""
         resultado = connectToMySQL(os.environ.get("BASEDATOS_NOMBRE")).query_db(query, data)
-        print("RESULTADO: ", resultado)
         return resultado
+    
+    @classmethod
+    def delete(cls,id):
+        query = f"DELETE FROM {cls.modelo} WHERE id = %(id)s"
+        data = {
+            'id': id
+        }
+        resultado = connectToMySQL(os.environ.get("BASEDATOS_NOMBRE")).query_db(query, data)
+        print("RESULTADO: ", resultado)
+        return resultado    
     
     @staticmethod
     def validar_largo(data, campo, largo):
@@ -68,6 +84,5 @@ class Receta(ModeloBase):
         if not is_valid:
             is_valid = cls.validar_largo(data, 'fecha_elaboracion', 9)
             is_valid = False
-
-
+            
         return is_valid

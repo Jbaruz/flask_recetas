@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block titulo %}Recetas{% endblock %}
+{% block contenido %}
+
+
+{% include '_menu.html' %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-10 col-lg-7">
+            <h1>Bienvenido, {{session.usuario}}</h1>
+            <h3>{{receta.nombre}}</h3>
+            <p>Posteado por:{{receta.usuario_nombre}}</p>
+            <p>Descripcion: {{receta.descripcion}}</p>
+            <p>Descripcion: {{receta.instrucciones}}</p>
+            <p>Descripcion: {{receta.fecha_elaboracion}}</p>
+
+        </div>
+        <div class="col-md-10 col-lg-7">
+            <a href="/recetas/nuevo">Crear</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,6 +1,7 @@
 from flask_base import app
 from flask import render_template, redirect, request, flash, session
 from flask_base.models.receta import Receta
+from flask_base.models.usuario import Usuario
 
 @app.route('/recetas')
 def recetas():
@@ -61,3 +62,16 @@ def procesar_editar_receta(id):
     actualizar = Receta.update(actualizar_receta)
     print("QUIERO VER ACTUALIZAR--->",actualizar)
     return redirect('/recetas')
+
+@app.route('/recetas/eliminar/<id>', methods=['GET'])
+def recetas_eliminar_procesar(id):
+
+    Receta.delete(id)
+    flash(f"exito al eliminar la ciudad","success")
+    return redirect('/recetas')
+
+@app.route('/recetas/detalle/<id>')
+def recetas_detalle(id):
+    if 'usuarios_id' not in session:
+        return redirect('/login')
+    return render_template('recetas/detalleRecetas.html', receta = Receta.view_by_id(id), usuario = Usuario.get_all())

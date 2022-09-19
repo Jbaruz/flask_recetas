@@ -32,12 +32,12 @@
                         </td>
                         <td>{{receta.usuario_nombre}} </td>
                         <td>
-                            <a href="#">Ver</a>
+                            <a href="/recetas/detalle/{{receta.id}}">Ver</a>
                             {% if session['usuarios_id']== receta.usuario_id%}
                             | <a href="/recetas/editar/{{receta.id}}">Editar</a>
                             {% endif %}
                             {% if session['usuarios_id']== receta.usuario_id%}
-                            | <a href="/delete">Eliminar</a>
+                            | <a href="/recetas/eliminar/{{receta.id}}">Eliminar</a>
                             {% endif %}
                         </td>
                     </tr>

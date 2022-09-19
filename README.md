@@ -1,6 +1,12 @@
 # Flask Recetas
 
-Avanzando - en progreso2
+Core Completo:
+- Crea un ERD basado en la información y la funcionalidad del wireframe y crea un
+esquema en tu base de datos.
+- Crea una aplicación Flask y utiliza el patrón de diseño MVC y POO para hacer que a
+aplicación sea funcional.
+- Lee atentamente e implementa las funciones alistadas en las notas adhesivas.
+
 
 ```
 APP_SECRET_KEY=poner cualquier cosa
