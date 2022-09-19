@@ -6,18 +6,23 @@
 {% include '_menu.html' %}
 
 <div class="container mt-5">
-    <div class="row">
+    <div class="row d-flex justify-content-around">
         <div class="col-md-10 col-lg-7">
             <h1>Bienvenido, {{session.usuario}}</h1>
             <h3>{{receta.nombre}}</h3>
-            <p>Posteado por:{{receta.usuario_nombre}}</p>
-            <p>Descripcion: {{receta.descripcion}}</p>
-            <p>Descripcion: {{receta.instrucciones}}</p>
-            <p>Descripcion: {{receta.fecha_elaboracion}}</p>
+            <p>Posteado por: {{receta.usuario_nombre}}</p>
+            <div class="card text-bg-light mb-3" style="max-width: 30rem;">
+                <div class="card-body">
+                    <p class="card-text"><strong>Descripcion:</strong> {{receta.descripcion}}</p>
+                    <p class="card-text"><strong>Instrucciones:</strong> {{receta.instrucciones}}</p>
+                    <p class="card-text"><strong>Fecha de elaboracion:</strong> {{receta.fecha_elaboracion}}</p>
 
+                </div>
+            </div>
         </div>
-        <div class="col-md-10 col-lg-7">
-            <a href="/recetas/nuevo">Crear</a>
+        <div class="col-md-10 col-lg-4">
+            <a class="m-5" href="/recetas">Recetas</a>
+            <a href="/logout">Salir</a>
         </div>
     </div>
 </div>
