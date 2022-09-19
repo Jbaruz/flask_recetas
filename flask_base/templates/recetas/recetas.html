@@ -8,14 +8,14 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-10 col-lg-7">
-            <h1>Bienvenidos a las {{sistema}} de {{session.usuario}}</h1>
-            <h2>Recetas Publicadas</h2>
+            <h1>Bienvenidos a las recetas de {{session.usuario}}</h1>
+            <h3>Recetas publicadas</h3>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Menos</th>
-                        <th>Posteado por</th>
+                        <th>Menos 30'</th>
+                        <th>Posteado por:</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -31,11 +31,22 @@
                             {% endif %}
                         </td>
                         <td>{{receta.usuario_nombre}} </td>
-                        <td><a href="#">Ver recetas |</a><a href="#">Editar |</a><a href="#"><a href="#">Eliminar |</a></a></td>
+                        <td>
+                            <a href="#">Ver</a>
+                            {% if session['usuarios_id']== receta.usuario_id%}
+                            | <a href="/recetas/editar/{{receta.id}}">Editar</a>
+                            {% endif %}
+                            {% if session['usuarios_id']== receta.usuario_id%}
+                            | <a href="/delete">Eliminar</a>
+                            {% endif %}
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
+        </div>
+        <div class="col-md-10 col-lg-7">
+            <a href="/recetas/nuevo">Crear</a>
         </div>
     </div>
 </div>

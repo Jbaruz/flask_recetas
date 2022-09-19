@@ -32,12 +32,12 @@ class Usuario(ModeloBase):
 
     @classmethod
     def update(cls,data):
-        query = """UPDATE usuarios 
-                        SET nombre = %(nombre)s,
-                        SET apellido = %(apellido)s,
-                        SET email = %(email)s,
-                        SET password = %(password)s,
-                        SET usuario = %(usuario)s,
+        query = """UPDATE usuarios SET
+                        nombre = %(nombre)s,
+                        apellido = %(apellido)s,
+                        email = %(email)s,
+                        password = %(password)s,
+                        usuario = %(usuario)s,
                         updated_at=NOW() 
                     WHERE id = %(id)s"""
         resultado = connectToMySQL(os.environ.get("BASEDATOS_NOMBRE")).query_db(query, data)

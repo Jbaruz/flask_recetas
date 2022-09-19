@@ -65,6 +65,7 @@ def procesar_login():
         return redirect("/login")
 
     session['usuario'] = usuario.nombre
+    session['usuarios_id'] = usuario.id
 
     return redirect('/recetas')
 

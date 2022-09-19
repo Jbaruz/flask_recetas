@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block titulo %}Creacion de nuevas{% endblock %}
+{% block contenido %}
+
+
+{% include '_menu.html' %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-10 col-lg-7">
+            <h1>Estimado {{session.usuario}} estas dispuesto a agregar una nueva {{sistema}}?</h1>
+        </div>
+        <div class="col-md-10 col-lg-4">
+
+            <h1>Agregar una nueva {{sistema}} </h1>
+            <hr>
+
+            <form action="/procesar_receta" method="post">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Titulo</label>
+                    <input type="text" name="nombre" class="form-control form-control-sm" id="nombre" aria-describedby="nombreHelp" placeholder="Nombre de la receta">
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripcion</label>
+                    <textarea type="descripcion" name="descripcion" class="form-control form-control-sm" id="descripcion" placeholder="Describe la receta"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="instrucciones" class="form-label">Instrucciones</label>
+                    <textarea type="instrucciones" name="instrucciones" class="form-control form-control-sm" id="instrucciones" placeholder="De las instrucciones de como se prepara"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="fecha_elaboracion" class="form-label">Fecha de elaboracion / cocción</label>
+                    <input type="date" name="fecha_elaboracion" class="form-control form-control-sm" id="fecha_elaboracion" aria-describedby="fechaElaboracionHelp">
+                </div>
+                <label for="form-label">Menos 30 minutos?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="menos_30" id="menos_301" value="1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Si
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="menos_30" id="menos_302" checked value="0">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        No
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-success">Ingresar al Sistema</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,6 +1,6 @@
 # Flask Recetas
 
-Avanzando - en progreso
+Avanzando - en progreso2
 
 ```
 APP_SECRET_KEY=poner cualquier cosa
