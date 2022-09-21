@@ -41,9 +41,11 @@ def procesar_receta():
 def editar_receta(id):
     if 'usuarios_id' not in session:
         return redirect('/login')
-    receta=Receta.get_by_id(id)[0]
-    receta['fecha_elaboracion'] = receta['fecha_elaboracion'].strftime("%Y-%m-%d")
-    return render_template('recetas/editarReceta.html',receta=receta)
+    receta=Receta.get_by_id_user(id)[0]
+    if session['usuarios_id'] == receta.usuario_id:
+        receta.fecha_elaboracion = receta.fecha_elaboracion.strftime("%Y-%m-%d")
+        return render_template('recetas/editarReceta.html',receta=receta)
+    return redirect(f'/recetas/{id}')
 
 @app.route('/procesar/editar/recetas/<int:id>', methods=['POST'])
 def procesar_editar_receta(id):
@@ -67,9 +69,11 @@ def procesar_editar_receta(id):
 def recetas_eliminar_procesar(id):
     if 'usuarios_id' not in session:
         return redirect('/login')
-
-    Receta.delete(id)
-    flash(f"exito al eliminar la ciudad","success")
+    receta=Receta.get_by_id_user(id)[0]
+    if session['usuarios_id'] == receta.usuario_id:
+        Receta.delete(id)
+        flash(f"exito al eliminar la ciudad","success")
+        return redirect('/recetas')
     return redirect('/recetas')
 
 

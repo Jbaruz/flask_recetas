@@ -28,6 +28,17 @@ class Receta(ModeloBase):
         results = connectToMySQL(os.environ.get("BASEDATOS_NOMBRE")).query_db(query,data)
         print("AQUI QUIERO VER -->",results)
         return cls(results[0])if len(results) > 0 else None
+    
+    @classmethod
+    def get_by_id_user(cls, id):
+        query = f"SELECT * FROM {cls.modelo} JOIN usuarios ON usuarios.id = {cls.modelo}.usuarios_id WHERE receta.id = %(id)s;" 
+        data = {'id': id }
+        results = connectToMySQL(os.environ.get("BASEDATOS_NOMBRE")).query_db(query,data)
+        print("AQUI QUIERO VER -->",results)
+        all_data = []
+        for data in results:
+            all_data.append(cls(data))
+        return all_data
 
     @classmethod
     def get_all_width_user(cls):
