@@ -32,7 +32,7 @@
                         </td>
                         <td>{{receta.usuario_nombre}} </td>
                         <td>
-                            <a href="/recetas/detalle/{{receta.id}}">Ver</a>
+                            <a href="/recetas/{{receta.id}}">Ver</a>
                             {% if session['usuarios_id']== receta.usuario_id%}
                             | <a href="/recetas/editar/{{receta.id}}">Editar</a>
                             {% endif %}
@@ -46,7 +46,7 @@
             </table>
         </div>
         <div class="col-md-10 col-lg-4">
-            <a class="m-5" href="/recetas">Recetas</a>
+            <a class="m-5" href="/recetas/nuevo">Crear</a>
             <a href="/logout">Salir</a>
         </div>
     </div>

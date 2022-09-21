@@ -65,13 +65,18 @@ def procesar_editar_receta(id):
 
 @app.route('/recetas/eliminar/<id>', methods=['GET'])
 def recetas_eliminar_procesar(id):
+    if 'usuarios_id' not in session:
+        return redirect('/login')
 
     Receta.delete(id)
     flash(f"exito al eliminar la ciudad","success")
     return redirect('/recetas')
 
-@app.route('/recetas/detalle/<id>')
+
+@app.route('/recetas/<id>')
 def recetas_detalle(id):
     if 'usuarios_id' not in session:
         return redirect('/login')
-    return render_template('recetas/detalleRecetas.html', receta = Receta.view_by_id(id), usuario = Usuario.get_all())
+    receta = Receta.view_by_id(id)
+    receta.fecha_elaboracion = receta.fecha_elaboracion.strftime('%Y-%m-%d')
+    return render_template('recetas/detalleRecetas.html', receta = receta)

@@ -64,7 +64,7 @@ def procesar_login():
         flash("Usuario/Correo/Clave Invalidas", "error")
         return redirect("/login")
 
-    session['usuario'] = usuario.nombre
+    session['usuario'] = f"{usuario.nombre} {usuario.apellido}"
     session['usuarios_id'] = usuario.id
 
     return redirect('/recetas')
